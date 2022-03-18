@@ -1,7 +1,7 @@
 import { derived } from "svelte/store";
 import { dictionary, locale, _ } from "svelte-i18n";
 
-const MESSAGE_FILE_URL_TEMPLATE = "lang/{locale}.json";
+const MESSAGE_FILE_URL_TEMPLATE = "/lang/{locale}.json";
 
 function setupI18n({ withLocale: _locale } = { withLocale: "en" }) {
   const messsagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace(
@@ -12,9 +12,10 @@ function setupI18n({ withLocale: _locale } = { withLocale: "en" }) {
   return fetch(messsagesFileUrl)
     .then((response) => response.json())
     .then((messages) => {
-      dictionary.set({ [_locale]: messages });
+      dictionary.set({[_locale]: messages});
       locale.set(_locale);
     });
+}
 
   // dictionary.set({
   //   en: {
