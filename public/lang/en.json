@@ -1,6 +1,6 @@
 {
-  header: {
-    title: "Hello!",
-    subtitle: "How are you doing?"
+  "header": {
+    "title": "Hello!",
+    "subtitle": "How are you doing?"
   }
 }

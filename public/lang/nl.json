@@ -1,6 +1,6 @@
 {
-  header: {
-    title: "Hoi!",
-    subtitle: "Hoe gaat het met jou?",
-  },
+  "header": {
+    "title": "Hoi!",
+    "subtitle": "Hoe gaat het met jou?"
+  }
 }

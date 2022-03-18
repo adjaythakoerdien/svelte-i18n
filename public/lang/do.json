@@ -1,6 +1,6 @@
 {
-  header: {
-    title: "M’ach!",
-    subtitle: "Kirekosi are yeri?",
-  },
+  "header": {
+    "title": "M’ach!",
+    "subtitle": "Kirekosi are yeri?"
+  }
 }
