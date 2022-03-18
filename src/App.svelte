@@ -1,8 +1,9 @@
 <script>
 	import Header from "./Header.svelte";
 	import { dictionary, locale } from "svelte-i18n";
-	import { setupI18n} from "./services/i18n";
+	import { setupI18n, isLocaleLoaded } from "./services/i18n";
 
+	locale.set("en");
 	setupI18n({ withLocale: "en" })
 
 	function changeLanguageToEnglish() {
@@ -15,6 +16,10 @@
 
 	function changeLanguageToDothraki() {
 		locale.set("do");
+	}
+
+	$: if (!isLocaleLoaded) {
+		setupI18n({ withLocale: "en" });
 	}
 
 	export let name;
@@ -47,9 +52,10 @@
 	}
 </style>
 
+{#if isLocaleLoaded}
 <Header />
 
-<main>
+<main role="main">
 	<h1>Hello {name}!</h1>
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 </main>
@@ -60,4 +66,6 @@
 	<button on:click={changeLanguageToEnglish}>Change header to English</button>
 	<button on:click={changeLanguageToDothraki}>Change header to Dothraki</button>
 </section>
-
+	{:else}
+	<p>Loading...</p>
+	{/if}

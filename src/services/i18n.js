@@ -1,28 +1,48 @@
+import { derived } from "svelte/store";
 import { dictionary, locale, _ } from "svelte-i18n";
 
-function setupI18n({ withLocale: _locale } = { withLocale: "en" }) {
-  dictionary.set({
-    en: {
-      header: {
-        title: "Hello!",
-        subtitle: "How are you doing?",
-      },
-    },
-    nl: {
-      header: {
-        title: "Hoi!",
-        subtitle: "Hoe gaat het met jou?",
-      },
-    },
-    do: {
-      header: {
-        title: "M’ach!",
-        subtitle: "Kirekosi are yeri?",
-      },
-    },
-  });
+const MESSAGE_FILE_URL_TEMPLATE = "lang/{locale}.json";
 
-  locale.set(_locale);
+function setupI18n({ withLocale: _locale } = { withLocale: "en" }) {
+  const messsagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace(
+    "{locale}",
+    _locale
+  );
+
+  return fetch(messsagesFileUrl)
+    .then((response) => response.json())
+    .then((messages) => {
+      dictionary.set({ [_locale]: messages });
+      locale.set(_locale);
+    });
+
+  // dictionary.set({
+  //   en: {
+  //     header: {
+  //       title: "Hello!",
+  //       subtitle: "How are you doing?",
+  //     },
+  //   },
+  //   nl: {
+  //     header: {
+  //       title: "Hoi!",
+  //       subtitle: "Hoe gaat het met jou?",
+  //     },
+  //   },
+  //   do: {
+  //     header: {
+  //       title: "M’ach!",
+  //       subtitle: "Kirekosi are yeri?",
+  //     },
+  //   },
+  // });
+
+  // locale.set(_locale);
 }
 
-export { _, setupI18n };
+const isLocaleLoaded = derived(
+  locale,
+  ($locale) => typeof $locale === "string"
+);
+
+export { _, setupI18n, isLocaleLoaded };
