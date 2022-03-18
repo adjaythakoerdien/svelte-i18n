@@ -7,15 +7,15 @@
 	setupI18n({ withLocale: "en" })
 
 	function changeLanguageToEnglish() {
-		locale.set("en");
+		setupI18n({ withLocale: "en" })
 	}
 
 	function changeLanguageToDutch() {
-		locale.set("nl");
+		setupI18n({ withLocale: "nl" })
 	}
 
 	function changeLanguageToDothraki() {
-		locale.set("do");
+		setupI18n({ withLocale: "do" })
 	}
 
 	$: if (!isLocaleLoaded) {
@@ -53,19 +53,19 @@
 </style>
 
 {#if isLocaleLoaded}
-<Header />
+	<Header />
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+	<main>
+		<h1>Hello {name}!</h1>
+		<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	</main>
 
-<section>
+	<section>
 
-	<button on:click={changeLanguageToDutch}>Change header to Dutch</button>
-	<button on:click={changeLanguageToEnglish}>Change header to English</button>
-	<button on:click={changeLanguageToDothraki}>Change header to Dothraki</button>
-</section>
-	{:else}
+		<button on:click={changeLanguageToDutch}>Change header to Dutch</button>
+		<button on:click={changeLanguageToEnglish}>Change header to English</button>
+		<button on:click={changeLanguageToDothraki}>Change header to Dothraki</button>
+	</section>
+{:else}
 	<p>Loading...</p>
-	{/if}
+{/if}
