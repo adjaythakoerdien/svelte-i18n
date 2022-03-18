@@ -4,41 +4,17 @@ import { dictionary, locale, _ } from "svelte-i18n";
 const MESSAGE_FILE_URL_TEMPLATE = "/lang/{locale}.json";
 
 function setupI18n({ withLocale: _locale } = { withLocale: "en" }) {
-  const messsagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace(
+  const messagesFileUrl = MESSAGE_FILE_URL_TEMPLATE.replace(
     "{locale}",
     _locale
   );
 
-  return fetch(messsagesFileUrl)
+  return fetch(messagesFileUrl)
     .then((response) => response.json())
     .then((messages) => {
-      dictionary.set({[_locale]: messages});
+      dictionary.set({ [_locale]: messages });
       locale.set(_locale);
     });
-}
-
-  // dictionary.set({
-  //   en: {
-  //     header: {
-  //       title: "Hello!",
-  //       subtitle: "How are you doing?",
-  //     },
-  //   },
-  //   nl: {
-  //     header: {
-  //       title: "Hoi!",
-  //       subtitle: "Hoe gaat het met jou?",
-  //     },
-  //   },
-  //   do: {
-  //     header: {
-  //       title: "M’ach!",
-  //       subtitle: "Kirekosi are yeri?",
-  //     },
-  //   },
-  // });
-
-  // locale.set(_locale);
 }
 
 const isLocaleLoaded = derived(
