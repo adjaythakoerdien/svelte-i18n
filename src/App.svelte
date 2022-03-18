@@ -1,11 +1,25 @@
 <script>
-	export let name;
-</script>
+	import Header from "./Header.svelte";
+	import { dictionary, locale } from "svelte-i18n";
+	import { setupI18n} from "./services/i18n";
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+	setupI18n({ withLocale: "en" })
+
+	function changeLanguageToEnglish() {
+		locale.set("en");
+	}
+
+	function changeLanguageToDutch() {
+		locale.set("nl");
+	}
+
+	function changeLanguageToDothraki() {
+		locale.set("do");
+	}
+
+	export let name;
+
+</script>
 
 <style>
 	main {
@@ -22,9 +36,28 @@
 		font-weight: 100;
 	}
 
+	section {
+		text-align: center;
+	}
+
 	@media (min-width: 640px) {
 		main {
 			max-width: none;
 		}
 	}
 </style>
+
+<Header />
+
+<main>
+	<h1>Hello {name}!</h1>
+	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+</main>
+
+<section>
+
+	<button on:click={changeLanguageToDutch}>Change header to Dutch</button>
+	<button on:click={changeLanguageToEnglish}>Change header to English</button>
+	<button on:click={changeLanguageToDothraki}>Change header to Dothraki</button>
+</section>
+
