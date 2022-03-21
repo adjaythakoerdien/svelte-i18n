@@ -1,4 +1,6 @@
 <script>
+	import {Router, Route, Link} from "svelte-navigator";
+
 	import Header from "./Header.svelte";
 	import { dictionary, locale } from "svelte-i18n";
 	import { setupI18n, isLocaleLoaded } from "./services/i18n";
@@ -53,19 +55,20 @@
 </style>
 
 {#if isLocaleLoaded}
-	<Header />
+<Header />
 
-	<main>
-		<h1>Hello {name}!</h1>
-		<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-	</main>
+<main>
+	<h1>Hello {name}!</h1>
+	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+</main>
 
-	<section>
+<section>
 
-		<button on:click={changeLanguageToDutch}>Change header to Dutch</button>
-		<button on:click={changeLanguageToEnglish}>Change header to English</button>
-		<button on:click={changeLanguageToDothraki}>Change header to Dothraki</button>
-	</section>
+	<button on:click={changeLanguageToDutch}>Change header to Dutch</button>
+	<button on:click={changeLanguageToEnglish}>Change header to English</button>
+	<button on:click={changeLanguageToDothraki}>Change header to Dothraki</button>
+</section>
+
 {:else}
 	<p>Loading...</p>
 {/if}
